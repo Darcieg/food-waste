@@ -14,7 +14,7 @@ This repository contains an in-progress data engineering project exploring food 
 - Jupyter Notebooks for data exploration
 
 ## Status
-Early development – ingestion and exploration complete for first dataset.
+Early development – ingestion and exploration of datasets.
 
 ## Dataset
 Source: https://insights.refed.com/
