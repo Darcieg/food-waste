@@ -18,3 +18,5 @@ Early development – ingestion and exploration of datasets.
 
 ## Dataset
 Source: https://insights.refed.com/
+
+For detailed setup and troubleshooting notes, see [docs/setup_notes.md](docs/setup_notes.md).
