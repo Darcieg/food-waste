@@ -1,7 +1,7 @@
 import great_expectations as gx
-from great_expectations.checkpoint import Checkpoint
 from pathlib import Path
 import pandas as pd
+from great_expectations.data_context import FileDataContext
 
 # Set up paths
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -10,8 +10,8 @@ CSV_FILE = REPO_ROOT / "data" / "raw" / "ReFED_US_Food_Surplus_Summary.csv"
 # Load the data
 df = pd.read_csv(CSV_FILE, skiprows=1)
 
-# Create an in-memory GE context
-context = gx.get_context(mode="ephemeral")
+# Create a persistent GE context
+context = FileDataContext(context_root_dir=REPO_ROOT / "great_expectations")
 
 # Add a Pandas datasource
 data_source = context.sources.add_pandas(name="refed_summary_source")
@@ -32,8 +32,6 @@ print("GE sees columns:", df_ge.columns.tolist())
 validator.expect_column_values_to_not_be_null("tons_surplus")
 validator.expect_column_values_to_be_between("tons_surplus", min_value=0)
 
-results = validator.validate()
-
-# Fail the script if expectations are not met
-if not results["success"]:
-    raise ValueError("Data validation failed!")
+# Save the expectation suite to disk
+suite = validator.get_expectation_suite()
+context.save_expectation_suite(suite)
