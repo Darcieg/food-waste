@@ -1,2 +1,15 @@
 # Ignore raw data files
 data/raw/
+
+# Ignore Python cache
+__pycache__/
+*.pyc 
+
+# Ignore GE runtime outputs
+great_expectations/uncommitted/
+
+# Ignore all GE store backend IDs across your repo
+**/.ge_store_backend_id
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
